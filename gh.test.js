@@ -36,9 +36,9 @@ describe("Github page tests", () => {
     const actual = await page.$eval(btnSelector, (link) => link.textContent);
     expect(actual).toContain("Get started with Team");
   });
-  afterEach(() => {
-    page.close();
-  });
+  // afterEach(() => {
+  //   page.close();
+  // });
 });
 
 describe("Actions page", () => {
@@ -47,9 +47,7 @@ describe("Actions page", () => {
   }, 6000);
 
   test("Actions page header", async () => {
-    const pageHeader = await page.$(
-      "body > div.application-main > main > div.overflow-x-hidden.overflow-y-hidden > div > div > div > div.col-12.text-center.text-lg-left.mx-auto.mx-lg-0.py-8.position-relative > h1"
-    );
+    const pageHeader = await page.$("h1");
     const elementText = await pageHeader.evaluate((el) => el.textContent);
     expect(elementText).toEqual(
       "Automate your workflow from idea to production"
@@ -62,7 +60,7 @@ describe("Actions page", () => {
     );
     const elementText = await pageHeader.evaluate((el) => el.textContent);
     expect(elementText).toContain("Any language");
-  });
+  }, 10000);
 
   test("Pricing page", async () => {
     await page.goto("https://github.com/pricing");
